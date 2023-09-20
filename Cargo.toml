@@ -1,0 +1,44 @@
+[package]
+name = "stylus-hello-world"
+version = "0.1.5"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/OffchainLabs/stylus-hello-world"
+repository = "https://github.com/OffchainLabs/stylus-hello-world"
+keywords = ["arbitrum", "ethereum", "stylus", "alloy"]
+description = "Stylus hello world example"
+
+[dependencies]
+serde_json = "1.0"
+getrandom = { version = "0.2", features = ["js"] }
+alloy-primitives = "0.3.1"
+alloy-sol-types = "0.3.1"
+stylus-sdk = "0.4.1"
+hex = "0.4.3"
+wee_alloc = "0.4.5"
+elliptic-curve = { version = "0.13.5", features = ["pkcs8"] }
+p256 = "0.13"
+webpki-roots = "0.23"
+signature = "2"
+mpz-core = { git = "https://github.com/privacy-scaling-explorations/mpz", rev = "76ed767" }
+tlsn-tls-core = { git = "https://github.com/tlsnotary/tlsn"}
+tlsn-core = { git = "https://github.com/tlsnotary/tlsn" }
+
+[dev-dependencies]
+tokio = { version = "1.12.0", features = ["full"] } 
+ethers = "2.0"
+eyre = "0.6.8"
+
+[features]
+export-abi = ["stylus-sdk/export-abi"]
+
+[profile.release]
+codegen-units = 1        # prefer efficiency to compile time
+panic = "abort"          # use simple panics
+opt-level = "z"          # optimize for size ("s" may also work)
+strip = true             # remove debug info
+lto = true               # link time optimization
+debug = false            # no debug data
+rpath = false            # no run-time search path
+debug-assertions = false # prune debug assertions
+incremental = false      # no incremental builds
